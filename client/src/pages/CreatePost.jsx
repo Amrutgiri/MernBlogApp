@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { app } from "../firebase";
 import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
-import ReactQuill from "react-quill";
+import {ReactQuill} from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { getStorage,ref,uploadBytesResumable,getDownloadURL } from "firebase/storage";
 import {CircularProgressbar} from 'react-circular-progressbar';
