@@ -1,13 +1,15 @@
 import  { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import {Table, TableBody} from 'flowbite-react'
+import {Button, Modal, Table, TableBody} from 'flowbite-react'
 import {Link} from 'react-router-dom'
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 export default function DashPosts() {
   const {currentUser} = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
 const [showMore, setShowMore] = useState(true);
-
-  console.log(userPosts);
+const [showModal, setShowModal] = useState(false);
+const [postIdToDelete,setPostIdToDelete]=useState(null);
+ 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -45,6 +47,22 @@ const [showMore, setShowMore] = useState(true);
     }
   }
 
+  const handleDeletePost = async()=>{
+    setShowModal(false);
+    try {
+      const res = await fetch(`/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,{
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if(!res.ok){
+        console.log(data.message);
+      }else {
+        setUserPosts((prev)=>prev.filter((post)=>post._id !== postIdToDelete));
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   return (
     <div className='p-3 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
       {currentUser.isAdmin && userPosts.length>0 ? (
@@ -88,7 +106,10 @@ const [showMore, setShowMore] = useState(true);
                   <span className='text-lg font-semibold'>{post.category}</span>
                   </Table.Cell>
                   <Table.Cell>
-                    <span className='font-medium text-red-500 cursor-pointer hover:underline'>Delete</span>
+                    <span onClick={()=>{
+                      setShowModal(true);
+                      setPostIdToDelete(post._id);
+                    }} className='font-medium text-red-500 cursor-pointer hover:underline'>Delete</span>
                   </Table.Cell>
                   <Table.Cell>
                     <Link className='text-teal-500 hover:underline' to={`update-post/${post._id}`}>
@@ -108,6 +129,30 @@ const [showMore, setShowMore] = useState(true);
       ):(
         <p>No Post Available</p>
       )}
+       <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size={"md"}
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 text-gray-400 h-14 w-14 dark:text-gray-400" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this post ?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={handleDeletePost}>
+                Yes, I'm sure
+              </Button>
+              <Button color="gray" onClick={() => setShowModal(false)}>
+                No,Cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }
