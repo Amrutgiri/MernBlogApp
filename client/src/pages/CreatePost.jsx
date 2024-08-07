@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { app } from "../firebase";
 import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
-import {ReactQuill} from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { getStorage,ref,uploadBytesResumable,getDownloadURL } from "firebase/storage";
 import {CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 export default function CreatePost() {
 
   const [file, setFile]=useState(null);
@@ -137,7 +137,9 @@ export default function CreatePost() {
         {
           formData.image && <img src={formData.image} alt="" className="object-cover w-full h-48 rounded-md" />
         }
+
         <ReactQuill theme="snow" placeholder="Write someting....." className="mb-12 h-72" required  onChange={(value)=>setFormData({...formData, content:value})}/>
+
         <Button type="submit" gradientDuoTone={"purpleToPink"}>
           Publish
         </Button>
