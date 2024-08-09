@@ -1,6 +1,7 @@
 import { Button, Spinner } from "flowbite-react"
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
+import CallToAction from "../components/CallToAction"
 
 export default function PostPage() {
 
@@ -57,6 +58,9 @@ export default function PostPage() {
 
         <div className="w-full max-w-2xl p-3 mx-auto post-content" dangerouslySetInnerHTML={{__html: post && post.content}}></div>
 
+        <div className="w-full max-w-4xl mx-auto">
+            <CallToAction/>
+        </div>
     </main>
   )
 }
