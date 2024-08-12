@@ -3,7 +3,7 @@ import moment from 'moment';
 import {FaThumbsUp} from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import {Button, Textarea} from 'flowbite-react';
-export default function Comment({comment, onLike, onEdit}) {
+export default function Comment({comment, onLike, onEdit,onDelete}) {
     const [user,setUser]=useState({});
     const [isEditing,setIsEditing]=useState(false);
     const [editedContent, setEditedContent]=useState(comment.content);
@@ -110,9 +110,14 @@ export default function Comment({comment, onLike, onEdit}) {
                 }</p>
                 {
                     currentUser && (currentUser._id === comment.userId || currentUser.isAdmin) && (
+                        <>
                         <button type='button' className='text-gray-500 hover:text-blue-500' onClick={handleEdit}>
                             Edit
                         </button>
+                        <button type='button' className='text-gray-500 hover:text-red-500' onClick={()=>onDelete(comment._id)}>
+                            Delete
+                        </button>
+                        </>
                     )
                 }
             </div>
