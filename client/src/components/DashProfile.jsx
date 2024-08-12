@@ -170,12 +170,7 @@ export default function DashProfile() {
     <div className="w-full max-w-lg p-3 mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          ref={filePickRef}
-        />
+        
         <div
           className="relative self-center w-32 h-32 overflow-hidden rounded-full shadow-md cursor-pointer"
           onClick={() => filePickRef.current.click()}
@@ -210,6 +205,12 @@ export default function DashProfile() {
             ref={filePickRef}
           />
         </div>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          ref={filePickRef}
+        />
         {imageUploadingError && (
           <Alert color={"failure"}>{imageUploadingError}</Alert>
         )}
