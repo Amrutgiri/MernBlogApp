@@ -11,15 +11,15 @@ import {
 export default function FooterCom() {
   return (
     <Footer container className="border border-t-8 border-teal-500">
-      <div className="w-full max-w-7xl mx-auto">
-        <div className="grid w-full justify-between sm:flex md:grid-cols-1">
+      <div className="w-full mx-auto max-w-7xl">
+        <div className="grid justify-between w-full sm:flex md:grid-cols-1">
           <div className="mt-5">
             <Link
               to={"/"}
-              className="self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white"
+              className="self-center text-lg font-semibold whitespace-nowrap sm:text-xl dark:text-white"
             >
-              <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
-                EWW
+              <span className="px-2 py-1 text-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                APGOSWAMI
               </span>
               Blog
             </Link>
@@ -73,7 +73,7 @@ export default function FooterCom() {
             by="EWW's Blogs"
             year={new Date().getFullYear()}
           />
-          <div className="flex  gap-6 sm:mt-0 mt-4 sm:justify-center">
+          <div className="flex gap-6 mt-4 sm:mt-0 sm:justify-center">
             <Footer.Icon href="#" icon={BsFacebook} />
             <Footer.Icon href="#" icon={BsInstagram} />
             <Footer.Icon href="#" icon={BsTwitterX} />
