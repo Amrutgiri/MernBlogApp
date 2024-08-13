@@ -17,6 +17,7 @@ const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_KEY,
     authDomain: "mernblogapp-qx02.onrender.com",
     databaseURL: "mern-blog-c1c24.appspot.com",
+    storageBucket: "mern-blog-c1c24.appspot.com",
     projectId: "mern-blog-c1c24",
     appId: "1:445369683164:web:b07c4c25a2f32195d63819"
   };
